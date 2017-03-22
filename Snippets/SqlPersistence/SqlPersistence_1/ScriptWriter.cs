@@ -8,6 +8,7 @@ using NServiceBus.Persistence.Sql;
 using NServiceBus.Persistence.Sql.ScriptBuilder;
 using NServiceBus.Unicast.Subscriptions;
 using NUnit.Framework;
+#pragma warning disable 618
 
 public class ScriptWriter
 {
@@ -40,7 +41,9 @@ public class ScriptWriter
         }
         foreach (var variant in Enum.GetValues(typeof(SqlVariant)).Cast<SqlVariant>())
         {
-            var timeoutCommands = TimeoutCommandBuilder.Build(sqlVariant: variant, tablePrefix: "EndpointName");
+            var timeoutCommands = TimeoutCommandBuilder.Build(
+                sqlVariant: variant,
+                tablePrefix: "EndpointName");
             Write(directory, variant, "TimeoutAdd", timeoutCommands.Add);
             Write(directory, variant, "TimeoutNext", timeoutCommands.Next);
             Write(directory, variant, "TimeoutRange", timeoutCommands.Range);
@@ -77,7 +80,7 @@ public class ScriptWriter
         correlationProperty: "OrderNumber",
         transitionalCorrelationProperty: "OrderId")]
     public class OrderSaga :
-        Saga<OrderSaga.OrderSagaData>
+        SqlSaga<OrderSaga.OrderSagaData>
     {
         public class OrderSagaData :
             ContainSagaData
@@ -88,7 +91,7 @@ public class ScriptWriter
 
         #endregion
 
-        protected override void ConfigureHowToFindSaga(SagaPropertyMapper<OrderSagaData> mapper)
+        protected override void ConfigureMapping(MessagePropertyMapper<OrderSagaData> mapper)
         {
         }
     }

@@ -17,7 +17,6 @@ class Usage
         #region SqlPersistenceUsageSqlServer
 
         var persistence = endpointConfiguration.UsePersistence<SqlPersistence>();
-
         var connection = @"Data Source=.\SQLEXPRESS;Initial Catalog=sqlpersistencesample;Integrated Security=True";
         persistence.SqlVariant(SqlVariant.MsSqlServer);
         persistence.ConnectionBuilder(
@@ -168,11 +167,50 @@ class Usage
         #endregion
     }
 
+    void Schema(EndpointConfiguration endpointConfiguration)
+    {
+        #region Schema
+
+        var persistence = endpointConfiguration.UsePersistence<SqlPersistence>();
+        persistence.TablePrefix("MySchema.");
+
+        #endregion
+    }
+
     void ExecuteScripts(string scriptDirectory, string tablePrefix)
     {
-        #region ExecuteScripts
+        #region ExecuteScriptsSqlServer
 
         using (var connection = new SqlConnection("ConnectionString"))
+        {
+            connection.Open();
+            using (var transaction = connection.BeginTransaction())
+            {
+                foreach (var createScript in Directory.EnumerateFiles(
+                    path: scriptDirectory,
+                    searchPattern: "*_Create.sql",
+                    searchOption: SearchOption.AllDirectories))
+                {
+                    using (var command = connection.CreateCommand())
+                    {
+                        command.Transaction = transaction;
+                        command.CommandText = File.ReadAllText(createScript);
+                        var parameter = command.CreateParameter();
+                        parameter.ParameterName = "tablePrefix";
+                        parameter.Value = tablePrefix;
+                        command.Parameters.Add(parameter);
+                        command.ExecuteNonQuery();
+                    }
+                }
+                transaction.Commit();
+            }
+        }
+
+        #endregion
+
+        #region ExecuteScriptsMySql
+
+        using (var connection = new MySqlConnection("ConnectionString"))
         {
             connection.Open();
             using (var transaction = connection.BeginTransaction())

@@ -32,12 +32,15 @@
       Title: Support Policy
     - Url: nservicebus/upgrades/release-policy
       Title: Release Policy
-    - Title: Security Advisories
+    - Url: security-advisories
+      Title: Security Advisories
       Articles:
       - Url: security-advisories/msmq-permissions
         Title: 2017-01-10
       - Url: security-advisories/sqlserver-sqlinjection
         Title: 2016-07-05
+    - Url: nservicebus/upgrades/6to6.2
+      Title: NServiceBus 6 to 6.2
     - Url: nservicebus/upgrades/5to6
       Title: NServiceBus 5 to 6
       Articles:
@@ -137,6 +140,8 @@
         Title: Version 1.x to 1.2.5
     - Title: SQL Persistence
       Articles:
+      - Url: nservicebus/upgrades/sqlpersistence-1to2
+        Title: Version 1 to 2
       - Url: nservicebus/upgrades/sqlpersistence-1.0.0-1.0.1
         Title: Version 1 to 1.0.1
     - Title: NServiceBus Testing
@@ -146,6 +151,10 @@
     - Title: Message Property Encryption
       Articles:
       - Url: nservicebus/upgrades/externalize-encryption
+        Title: Migrate To External Nuget
+    - Title: Performance Counters
+      Articles:
+      - Url: nservicebus/upgrades/externalize-perfcounters
         Title: Migrate To External Nuget
     - Title: Nsb6 ServiceControl Plugins
       Articles:
@@ -192,10 +201,10 @@
     - Url: nservicebus/messaging/publish-subscribe
       Title: Publish Subscribe
       Articles:
-      - Url: nservicebus/messaging/publish-subscribe/controlling-what-is-subscribed
-        Title: Subscription configuration
       - Url: nservicebus/messaging/publish-subscribe/publish-handle-event
         Title: Publish and Handle an Event
+      - Url: nservicebus/messaging/publish-subscribe/controlling-what-is-subscribed
+        Title: Subscription configuration
     - Url: nservicebus/messaging/headers
       Title: Message Headers
       Articles:
@@ -267,14 +276,12 @@
       Articles:
       - Url: nservicebus/hosting/nservicebus-host/installation
         Title: Installation
-      - Url: nservicebus/hosting/nservicebus-host/logging
-        Title: Logging
       - Url: nservicebus/hosting/nservicebus-host/profiles
         Title: Profiles
-      - Url: nservicebus/hosting/nservicebus-host/logging-profiles
-        Title: Logging Profiles
-      - Url: nservicebus/hosting/nservicebus-host/more-on-profiles
-        Title: More On Profiles
+      - Url: nservicebus/hosting/nservicebus-host/profiles-customization
+        Title: Profiles customization
+      - Url: nservicebus/hosting/nservicebus-host/logging-configuration
+        Title: Logging configuration
     - Url: nservicebus/hosting/cloud-services-host
       Title: Azure Cloud Services Host
       Articles:
@@ -470,6 +477,8 @@
       Title: Design
     - Url: nservicebus/sqlserver/connection-settings
       Title: Connection Settings
+    - Url: nservicebus/sqlserver/addressing
+      Title: Addressing
     - Url: nservicebus/sqlserver/transactions
       Title: Transaction support
     - Url: nservicebus/sqlserver/concurrency
@@ -527,22 +536,24 @@
   - Url: nservicebus/rabbitmq
     Title: RabbitMQ Transport
     Articles:
-    - Url: nservicebus/rabbitmq/rabbitmqclient-nuget
-      Title: RabbitMQ.Client NuGet usage
     - Url: nservicebus/rabbitmq/connection-settings
       Title: Connection settings
     - Url: nservicebus/rabbitmq/routing-topology
       Title: Routing topology
-    - Url: nservicebus/rabbitmq/callbacks
-      Title: Callback support
+    - Url: nservicebus/rabbitmq/delayed-delivery
+      Title: Delayed Delivery
     - Url: nservicebus/rabbitmq/message-id-strategy
       Title: Message Id strategy
+    - Url: nservicebus/rabbitmq/callbacks
+      Title: Callback support
     - Url: nservicebus/rabbitmq/transactions-and-delivery-guarantees
       Title: Transactions and delivery guarantees
     - Url: nservicebus/rabbitmq/cluster
       Title: In a cluster
     - Url: nservicebus/rabbitmq/operations-scripting
       Title: Scripting
+    - Url: nservicebus/rabbitmq/rabbitmqclient-nuget
+      Title: RabbitMQ.Client NuGet usage
   - Url: nservicebus/eventstoretransport
     Title: Event Store Transport
   - Url: nservicebus/kafka
@@ -579,24 +590,35 @@
     Articles:
     - Url: nservicebus/persistence/order
       Title: Persistence order
-    - Url: nservicebus/persistence/authoring-custom
-      Title: Custom
     - Url: nservicebus/persistence/in-memory
       Title: In Memory
     - Url: nservicebus/msmq/subscription-persistence
       Title: MSMQ Subscription
-    - Url: nservicebus/nhibernate
-      Title: NHibernate Persistence
+    - Url: nservicebus/sql-persistence
+      Title: Sql Persistence
       Articles:
-      - Url: nservicebus/nhibernate/accessing-data
-        Title: Business data
-      - Url: nservicebus/nhibernate/saga-concurrency
-        Title: Saga concurrency
-      - Url: nservicebus/nhibernate/outbox
-        Title: Outbox
-      - Url: nservicebus/nhibernate/sql-azure
-        Title: SQL Azure
-      - Url: nservicebus/nhibernate/scripting
+      - Url: nservicebus/sql-persistence/saga
+        Title: Saga Persistence
+      - Url: nservicebus/sql-persistence/installer-workflow
+        Title: Installer Workflow
+      - Url: nservicebus/sql-persistence/sqlserver-scripts
+        Title: MS SQL Server Scripts
+      - Url: nservicebus/sql-persistence/mysql-scripts
+        Title: MySQL Scripts
+    - Url: nservicebus/azure-storage-persistence
+      Title: Azure Storage Persistence
+      Articles:
+      - Url: nservicebus/upgrades/asp-saga-deduplication
+        Title: Version 6.2.3 to 6.2.4
+      - Url: nservicebus/upgrades/asp-saga-pruning
+        Title: Version 6.2.4 to 6.2.5
+      - Url: nservicebus/azure-storage-persistence/configuration
+        Title: Configuration
+      - Url: nservicebus/azure/understanding-transactionality-in-azure
+        Title: Transactions in Azure
+      - Url: nservicebus/azure-storage-persistence/performance-tuning
+        Title: Performance Tuning
+      - Url: nservicebus/azure-storage-persistence/scripting
         Title: Scripting
     - Url: nservicebus/ravendb
       Title: RavenDB Persistence
@@ -619,34 +641,21 @@
         Title: Subscription versioning
       - Url: nservicebus/ravendb/licensing
         Title: Licensing
-    - Url: nservicebus/azure-storage-persistence
-      Title: Azure Storage Persistence
+    - Url: nservicebus/nhibernate
+      Title: NHibernate Persistence
       Articles:
-      - Url: nservicebus/upgrades/asp-saga-deduplication
-        Title: Version 6.2.3 to 6.2.4
-      - Url: nservicebus/upgrades/asp-saga-pruning
-        Title: Version 6.2.4 to 6.2.5
-      - Url: nservicebus/azure-storage-persistence/configuration
-        Title: Configuration
-      - Url: nservicebus/azure/understanding-transactionality-in-azure
-        Title: Transactions in Azure
-      - Url: nservicebus/azure-storage-persistence/performance-tuning
-        Title: Performance Tuning
-      - Url: nservicebus/azure-storage-persistence/scripting
+      - Url: nservicebus/nhibernate/accessing-data
+        Title: Business data
+      - Url: nservicebus/nhibernate/saga-concurrency
+        Title: Saga concurrency
+      - Url: nservicebus/nhibernate/outbox
+        Title: Outbox
+      - Url: nservicebus/nhibernate/sql-azure
+        Title: SQL Azure
+      - Url: nservicebus/nhibernate/scripting
         Title: Scripting
     - Url: nservicebus/mongodb-persistence-tekmaven
       Title: MongoDB Persistence
-    - Url: nservicebus/sql-persistence
-      Title: Sql Persistence
-      Articles:
-      - Url: nservicebus/sql-persistence/saga
-        Title: Saga Persistence
-      - Url: nservicebus/sql-persistence/installer-workflow
-        Title: Installer Workflow
-      - Url: nservicebus/sql-persistence/sqlserver-scripts
-        Title: MS SQL Server Scripts
-      - Url: nservicebus/sql-persistence/mysql-scripts
-        Title: MySQL Scripts
   - Url: nservicebus/containers
     Title: Containers
     Articles:
@@ -689,6 +698,8 @@
       Title: Auditing Messages
     - Url: samples/logging
       Title: Samples
+  - Url: nservicebus/security
+    Title: Security
   - Url: nservicebus/operations
     Title: Operations
     Articles:
